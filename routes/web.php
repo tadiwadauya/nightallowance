@@ -29,7 +29,7 @@ Route::post('importExcel', [ExcelController::class, 'importExcel'])->name('impor
 
 Auth::routes();
 
-Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
+Route::get('admin-home', [HomeController::class, 'admin'])->name('admin-home')->middleware('is_admin');
 Route::get('home', [HomeController::class, 'index'])->name('home');
 
 Auth::routes();
