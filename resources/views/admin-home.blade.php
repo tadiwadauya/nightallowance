@@ -7,7 +7,7 @@
 
 @include('components.navbar')
 
-@include('layouts.sidebar')
+@include('components.sidebar')
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper pt-4">

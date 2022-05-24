@@ -1,10 +1,18 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-        <img src="{{ asset('dist/img/favicon.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-            style="opacity: .8">
-        <span class="brand-text font-weight-light">Night Allowance </span>
-    </a>
+    @if (Auth::user()->is_admin == true)
+        <a href="{{ url('/admin-home') }}" class="brand-link">
+            <img src="{{ asset('dist/img/favicon.png') }}" alt="AdminLTE Logo"
+                class="brand-image img-circle elevation-3" style="opacity: .8">
+            <span class="brand-text font-weight-light">Night Allowance </span>
+        </a>
+    @else
+        <a href="{{ url('/home') }}" class="brand-link">
+            <img src="{{ asset('dist/img/favicon.png') }}" alt="AdminLTE Logo"
+                class="brand-image img-circle elevation-3" style="opacity: .8">
+            <span class="brand-text font-weight-light">Night Allowance </span>
+        </a>
+    @endif
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -14,7 +22,7 @@
                with font-awesome or any other icon font library -->
                 <li class="nav-item ">
                     @if (Auth::user()->is_admin == true)
-                        <a href="{{ url('/admin-home') }}" class="nav-link  active">
+                        <a href="{{ url('/admin-home') }}" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Home
@@ -22,7 +30,7 @@
                             </p>
                         </a>
                     @else
-                        <a href="{{ url('/home') }}" class="nav-link  active">
+                        <a href="{{ url('/home') }}" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Home
