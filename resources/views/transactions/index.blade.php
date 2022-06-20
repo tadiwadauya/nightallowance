@@ -72,7 +72,7 @@
                                             <td>{{ $transaction->month }}</td>
                                             <td>
                                                 @if ($driver)
-                                                    {{ $driver->first_name }} {{ $driver->last_name }}
+                                                {{$driver->first_name}} {{$driver->last_name}} - {{$driver->pay_number}}
                                                 @endif
                                             </td>
                                             <td>{{ $transaction->amt_adv }}</td>

@@ -52,9 +52,7 @@
                                                 <option value="">Select Driver</option>
                                                 @if ($drivers)
                                                     @foreach ($drivers as $driver)
-                                                        <option value="{{ $driver->pay_number }}">
-                                                            {{ $driver->first_name }} {{ $driver->last_name }}
-                                                        </option>
+                                                    <option value="{{ $driver->pay_number }}" >{{ $driver->first_name }} {{ $driver->last_name }}-{{$driver->pay_number}}</option>
                                                     @endforeach
                                                 @endif
                                             </select>

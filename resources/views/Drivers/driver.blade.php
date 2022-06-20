@@ -7,7 +7,7 @@
 @if($layout == 'index')
 
             <section class="col">
-                @include("Drivers\driverslist")
+                @include("Drivers.driverslist")
             </section >
             <section class="col">
 
