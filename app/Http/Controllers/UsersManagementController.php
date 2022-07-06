@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Event\TerminateEvent;
 
 class UsersManagementController extends Controller
 {
-        /**
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -29,7 +29,6 @@ class UsersManagementController extends Controller
     {
         $users = User::all();
         return View('usersmanagement.show-users', compact('users'));
-
     }
 
     /**
@@ -51,40 +50,40 @@ class UsersManagementController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),
-        [
-            'paynumber'             => 'required|max:255|unique:users|alpha_dash',
-            'first_name' =>             'required',
-            'last_name' =>              'required',
-            'email' =>              'required|email|max:255|unique:users',
-        ]);
-        if ($validator->fails())
-        {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'paynumber'             => 'required|max:255|unique:users|alpha_dash',
+                'first_name' =>             'required',
+                'last_name' =>              'required',
+                'email' =>              'required|email|max:255|unique:users',
+            ]
+        );
+        if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
-        }
-        else {
+        } else {
             try {
-         $users= new User();
-         $users->name = $request->input('name');
-         $users->paynumber = $request->input('paynumber');
-         $users->first_name = $request->input('first_name');
-         $users->last_name = $request->input('last_name');
-         $users->Position = $request->input('Position');
-         $users->mobile = $request->input('mobile');
-         $users->email = $request->input('email');
-         $users->password = Hash::make($request->input('password'));
+                $users = new User();
+                $users->name = $request->input('name');
+                $users->paynumber = $request->input('paynumber');
+                $users->first_name = $request->input('first_name');
+                $users->last_name = $request->input('last_name');
+                $users->Department = $request->input('Department');
+                $users->Position = $request->input('Position');
+                $users->mobile = $request->input('mobile');
+                $users->email = $request->input('email');
+                $users->password = Hash::make($request->input('password'));
 
-       $users->save();
+                $users->save();
 
 
-       return redirect('users')->with('success','User was created successfully');
+                return redirect('users')->with('success', 'User was created successfully');
+            } catch (\Exception $th) {
+                return redirect()->back()->with('error', 'Failed to create new user');
+            }
+        }
 
-    } catch (\Exception $th) {
-        return redirect()->back()->with('error','Failed to create new user');
-    }
-}
-
-return redirect()->back()->with('error','System was unable to create user account.');
+        return redirect()->back()->with('error', 'System was unable to create user account.');
     }
 
 
@@ -99,8 +98,7 @@ return redirect()->back()->with('error','System was unable to create user accoun
         $yuza = Auth::user();
         $user = User::find($id);
         $users = User::all();
-        return view('usersmanagement.show-user',['user'=>$user]);
-
+        return view('usersmanagement.show-user', ['user' => $user]);
     }
 
     /**
@@ -112,7 +110,7 @@ return redirect()->back()->with('error','System was unable to create user accoun
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        $data=[ 'user'        => $user,];
+        $data = ['user'        => $user,];
         return view('usersmanagement.edit-user')->with($data);
     }
 
@@ -141,9 +139,9 @@ return redirect()->back()->with('error','System was unable to create user accoun
                 'password' => 'nullable|confirmed|min:6',
             ]);
         }
-    if ($validator->fails()) {
-        return back()->withErrors($validator)->withInput();
-    }
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
         $user->name = $request->input('name');
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
@@ -162,8 +160,7 @@ return redirect()->back()->with('error','System was unable to create user accoun
 
         $user->save();
 
-        return redirect('users')->with('success','User details has been updated Successfully');
-
+        return redirect('users')->with('success', 'User details has been updated Successfully');
     }
 
 
