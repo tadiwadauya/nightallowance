@@ -72,10 +72,11 @@ class UsersManagementController extends Controller
                 $users->Position = $request->input('Position');
                 $users->mobile = $request->input('mobile');
                 $users->email = $request->input('email');
+                $users->is_admin = $request->has('is_admin');
+                $users->is_hr = $request->has('is_hr');
                 $users->password = Hash::make($request->input('password'));
 
                 $users->save();
-
 
                 return redirect('users')->with('success', 'User was created successfully');
             } catch (\Exception $th) {

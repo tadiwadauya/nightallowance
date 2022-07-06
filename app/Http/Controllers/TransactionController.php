@@ -17,32 +17,31 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $drivers = Driver::all();
-      //  $transactions = Transaction::latest()->get();
-      $transactions = DB::table('transactions')
-      ->where('status', 'active');
-      $transactions = $transactions->get();
-        return view('transactions.index',compact('transactions','drivers'));
+        // $drivers = Driver::all();
+        //  $transactions = Transaction::latest()->get();
+        // $transactions = DB::table('transactions')
+        //     ->where('status', 'active');
+        // $transactions = $transactions->get();
 
+        $transactions = DB::table('transactions')->where('status', 'active')->get();
+        return view('transactions.index', compact('transactions'));
     }
 
     public function closed()
     {
         $drivers = Driver::all();
-      //  $transactions = Transaction::latest()->get();
-      $transactions = DB::table('transactions')
-      ->where('status', 'closed');
-      $transactions = $transactions->get();
-        return view('transactions.closedtrans',compact('transactions','drivers'));
-
+        //  $transactions = Transaction::latest()->get();
+        $transactions = DB::table('transactions')
+            ->where('status', 'closed');
+        $transactions = $transactions->get();
+        return view('transactions.closedtrans', compact('transactions', 'drivers'));
     }
 
     public function report()
     {
         $drivers = Driver::all();
         $transactions = Transaction::latest()->get();
-        return view('transactions.report',compact('transactions','drivers'));
-
+        return view('transactions.report', compact('transactions', 'drivers'));
     }
 
     /**
@@ -54,7 +53,7 @@ class TransactionController extends Controller
     {
         $drivers = Driver::all();
         $transactions = Transaction::all();
-       return view('transactions.create', compact('transactions','drivers'));
+        return view('transactions.create', compact('transactions', 'drivers'));
     }
 
     /**
@@ -83,7 +82,7 @@ class TransactionController extends Controller
         $transactions->closing_bal = $request->input('closing_bal');
         $transactions->final_recovery = $request->input('final_recovery');
         $transactions->total_amt_recoverd = $request->input('total_amt_recoverd');
-        $transactions->done_by= $request->input('done_by');
+        $transactions->done_by = $request->input('done_by');
         $transactions->save();
         return redirect('/transactions');
     }
@@ -99,7 +98,7 @@ class TransactionController extends Controller
         $drivers = Driver::all();
         $transaction = Transaction::find($id);
 
-        return view('transactions.show',compact('transaction','drivers'));
+        return view('transactions.show', compact('transaction', 'drivers'));
     }
 
     /**
@@ -114,7 +113,7 @@ class TransactionController extends Controller
         $drivers = Driver::all();
         $transaction = Transaction::find($id);
 
-        return view('transactions.edit',compact('transaction','drivers'));
+        return view('transactions.edit', compact('transaction', 'drivers'));
     }
 
     /**
@@ -129,25 +128,25 @@ class TransactionController extends Controller
         $transactions = Transaction::findOrFail($id);
 
 
-    $transactions->driver = $request->input('driver');
-    $transactions->amt_adv = $request->input('amt_adv');
-    $transactions->percentage = $request->input('percentage');
-    $transactions->amount = $request->input('amount');
-    $transactions->days_truck = $request->input('days_truck');
-    $transactions->amt_per_day = $request->input('amt_per_day');
-    $transactions->amt_utilized = $request->input('amt_utilized');
-    $transactions->bal_to_be_recoverd = $request->input('bal_to_be_recoverd');
-    $transactions->days_rebooking = $request->input('days_rebooking');
-    $transactions->rebooking_amt = $request->input('rebooking_amt');
-    $transactions->days_rebooking1 = $request->input('days_rebooking1');
-    $transactions->rebooking_amt2 = $request->input('rebooking_amt2');
-    $transactions->closing_bal = $request->input('closing_bal');
-    $transactions->final_recovery = $request->input('final_recovery');
-    $transactions->total_amt_recoverd = $request->input('total_amt_recoverd');
-    $transactions->status = $request->input('status');
-    $transactions->save();
+        $transactions->driver = $request->input('driver');
+        $transactions->amt_adv = $request->input('amt_adv');
+        $transactions->percentage = $request->input('percentage');
+        $transactions->amount = $request->input('amount');
+        $transactions->days_truck = $request->input('days_truck');
+        $transactions->amt_per_day = $request->input('amt_per_day');
+        $transactions->amt_utilized = $request->input('amt_utilized');
+        $transactions->bal_to_be_recoverd = $request->input('bal_to_be_recoverd');
+        $transactions->days_rebooking = $request->input('days_rebooking');
+        $transactions->rebooking_amt = $request->input('rebooking_amt');
+        $transactions->days_rebooking1 = $request->input('days_rebooking1');
+        $transactions->rebooking_amt2 = $request->input('rebooking_amt2');
+        $transactions->closing_bal = $request->input('closing_bal');
+        $transactions->final_recovery = $request->input('final_recovery');
+        $transactions->total_amt_recoverd = $request->input('total_amt_recoverd');
+        $transactions->status = $request->input('status');
+        $transactions->save();
 
-        return redirect('/transactions')->with('success','Transaction details has been updated Successfully');
+        return redirect('/transactions')->with('success', 'Transaction details has been updated Successfully');
     }
 
     /**
@@ -158,6 +157,5 @@ class TransactionController extends Controller
      */
     public function destroy($id)
     {
-
     }
 }

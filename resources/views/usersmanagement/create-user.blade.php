@@ -142,7 +142,6 @@
                                     </div>
                                 </div>
 
-
                                 <div class="row mb-4">
                                     <div class="col">
                                         <input type="password" name="password" id="password"
@@ -167,6 +166,21 @@
                                         @enderror
                                     </div>
                                 </div>
+
+                                <div class="p-1 mb-4">
+                                    <p style="color:red;locanode">If user is neither Admin nor HR do no tick.</p>
+                                    <div class="row">
+                                        <div class="col">
+                                            <input type="checkbox" name="is_admin" value="1" id="is_admin"> Is
+                                            Admin
+                                        </div>
+                                        <div class="col">
+                                            <input type="checkbox" name="is_hr" value="1" id="is_hr"> Is
+                                            HR
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <input type="submit" value="Save" class="btn btn-info">
                                 <input type="submit" value="Reset" class="btn btn-warning">
                             </form>

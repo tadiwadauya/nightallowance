@@ -20,10 +20,12 @@
                     <h1 class="m-0">Active Transactions</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item active"> <a href="{{ url('transactions/create') }}">Create
-                                Transaction</a></li>
-                    </ol>
+                    @if (Auth::user()->is_hr != true)
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item active"> <a href="{{ url('transactions/create') }}">Create
+                                    Transaction</a></li>
+                        </ol>
+                    @endif
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -72,7 +74,8 @@
                                             <td>{{ $transaction->month }}</td>
                                             <td>
                                                 @if ($driver)
-                                                {{$driver->first_name}} {{$driver->last_name}} - {{$driver->pay_number}}
+                                                    {{ $driver->first_name }} {{ $driver->last_name }} -
+                                                    {{ $driver->pay_number }}
                                                 @endif
                                             </td>
                                             <td>{{ $transaction->amt_adv }}</td>

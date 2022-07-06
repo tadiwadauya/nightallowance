@@ -2,8 +2,8 @@
     <!-- Brand Logo -->
     @if (Auth::user()->is_admin == true)
         <a href="{{ url('/admin-home') }}" class="brand-link">
-            <img src="{{ asset('dist/img/favicon.png') }}" alt="AdminLTE Logo"
-                class="brand-image img-circle elevation-3" style="opacity: .8">
+            <img src="{{ asset('dist/img/favicon.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                style="opacity: .8">
             <span class="brand-text font-weight-light">Night Allowance </span>
         </a>
     @else
@@ -17,7 +17,8 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                 <li class="nav-item ">
@@ -26,7 +27,6 @@
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Home
-                                <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                     @else
@@ -50,12 +50,14 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ url('transactions/create') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Create Transactions</p>
-                            </a>
-                        </li>
+                        @if (Auth::user()->is_hr != true)
+                            <li class="nav-item">
+                                <a href="{{ url('transactions/create') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Create Transactions</p>
+                                </a>
+                            </li>
+                        @endif
                         <li class="nav-item">
                             <a href="{{ url('transactions/') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -130,23 +132,23 @@
 
                 <li class="nav-item">
 
-                    <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
-                          document.getElementById('logout-form').submit();" aria-expanded="false">
-
-                        <span> {{ __('Logout') }}</span>
+                    <a href="{{ route('logout') }}" class="nav-link"
+                        onclick="event.preventDefault();
+                          document.getElementById('logout-form').submit();"
+                        aria-expanded="false">
+                        <i class="fas fa-sign-out-alt nav-icon"></i>
+                        <p>Logout</p>
 
                     </a>
-    </div>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
 
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-        @csrf
-    </form>
+                </li>
 
-    </li>
-
-    </ul>
-    </nav>
-    <!-- /.sidebar-menu -->
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
 </aside>
